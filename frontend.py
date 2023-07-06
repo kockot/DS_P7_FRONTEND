@@ -85,7 +85,11 @@ def call_api():
 
 loading_str = None
 
-st.set_page_config(layout="wide")
+st.set_page_config(
+    layout="wide", 
+    page_title="Prêt à dépenser", 
+    page_icon="🤝"
+)
 
 status_container = st.empty()
 
