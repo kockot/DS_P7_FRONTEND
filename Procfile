@@ -1,1 +1,1 @@
-web: streamlit run frontend.py
+web: streamlit run frontend.py --server.port 80
