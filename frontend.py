@@ -3,8 +3,15 @@ from streamlit.components.v1 import html
 import requests
 import base64
 import time
-    
-DATA_URL = 'http://192.168.0.201:12080/predict/'
+import os
+
+API_ENDPOINT_URL = os.environ.get("API_ENDPOINT_URL")
+assert API_ENDPOINT_URL is not None
+if not API_ENDPOINT_URL.endswith("/"):
+    API_ENDPOINT_URL = API_ENDPOINT_URL + "/"
+
+API_ENDPOINT_TOKEN = os.environ.get("API_ENDPOINT_TOKEN")
+assert API_ENDPOINT_TOKEN is not None
 
 def clear_cb():
     for c in [explanation_container, result_container_col1, result_container_col2, result_container_col3]:
@@ -38,7 +45,13 @@ def call_api():
         st.markdown(html_string, unsafe_allow_html=True)
 
     try:
-        r = requests.get(f"{DATA_URL}{sk_id_curr}?max_display={max_display}")
+        r = requests.get(
+            f"{API_ENDPOINT_URL}{sk_id_curr}?max_display={max_display}",
+            headers={
+                'Content-Type':'application/json',
+                'Authorization': 'Bearer {}'.format(API_ENDPOINT_TOKEN)
+            }
+        )
         r.raise_for_status()
     except requests.exceptions.HTTPError as errh:
         alert(f"Http error: {errh}")
