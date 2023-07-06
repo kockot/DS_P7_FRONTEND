@@ -1,1 +1,1 @@
-web: streamlit run frontend.py --server.port 80
+web: sh setup.sh && streamlit run frontend.py
