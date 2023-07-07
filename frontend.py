@@ -93,6 +93,7 @@ st.set_page_config(
 
 status_container = st.empty()
 
+st.info("""Entrez l'identifiant de la demande de prêt, éventuellement changez le nombre d'éléments explicatifs à afficher puis cliquez sur le bouton "Chercher".""")
 top_container = st.container()
 with top_container:
     top_col0,top_col1,top_col_dummy, top_col2,top_col3 = st.columns([2,6,0.05,1,1])
@@ -111,7 +112,7 @@ with top_container:
         )
     with top_col3:
         sk_id_clear_btn = st.button(
-                label="RAZ",
+                label="Effacer",
                 key="sk_id_clear_btn",
                 type="secondary",
                 on_click=clear_cb
@@ -119,6 +120,8 @@ with top_container:
     with top_col_dummy:
         st.write(" ")
         
+st.info("Réglez éventuellement le nombre d'éléments à expliquer pour la price de décision")
+
 top_container2 = st.container()
 with top_container2:
     top_col2_0,top_col2_1,top_col2_2 = st.columns([2,6,2.05])
